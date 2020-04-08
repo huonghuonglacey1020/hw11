@@ -1,32 +1,33 @@
-const Employee = require('./Develop/lib/Employee');
-const Manager = require('./Develop/lib/Manager');
-const Intern = require('./Develop/lib/Intern');
-const Engineer = require('./lib/Engineer');
+//const Employee = require('./lib/Employee');
+//const Manager = require('./lib/Manager');
+//const Intern = require('./lib/Intern');
+//const Engineer = require('./lib/Engineer');
 
-const path = require("path");
-const fs = require("fs");
-const writeFileAsync = util.promisify(fs.writeFile);
-const open = require('open')
+//const path = require("path");
+//const fs = require("fs");
+//const writeFileAsync = util.promisify(fs.writeFile);
+//const open = require('open')
 ​
-const OUTPUT_DIR = path.resolve(__dirname, "output")
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+//onst OUTPUT_DIR = path.resolve(__dirname, "output")
+//const outputPath = path.join(OUTPUT_DIR, "team.html");
 ​
-const render = require("./lib/htmlRenderer");
+//const render = require("./lib/htmlRenderer");
 ​
 ​
 // Write code to use inquirer to gather information about the development team members,
 const inquirer = require('inquirer');
-const util = require('util');
-const fs = require('fs');
+const team = [];
+const idList = [];
+
+//const util = require('util');
+//const fs = require('fs');
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
-const list = [];
-const ManagerHTML = require("../Develop/templates/manager");
-const InternHTML = require("../Develop/templates/intern");
-const MainHTML = require("../Develop/templates/main");
-const EngineerHTML = require("../Develop/templates/engineer");
+//const list = [];
+/*
+
 createEmployee()
 function createEmployee(){
     promptUser().then(function(value){
@@ -136,10 +137,43 @@ function RoleHTML(){
         }
     })
     let HTML = MainHTML(employees)
-    return writeFileAsync("generateEmployee.html", HTML)
+    return writeFileAsync("team.html", HTML)
     .then(function(){
-        open("generateEmployee.html")
+        open("team.html")
     })
 }
+promptEngineer();
+*/
+createManager()
+function createManager(){
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'managerName',
+            message: 'what is your manager name? ',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'what is your manager id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'what is your manager email ?',
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'what is your office number ?'
+        }
+    ]).then(answer => {
+        console.log(answer)
+        const Manager = new Manager(answer.name, answer.id, answer.email, answer.officeNumber);
+        team.push(Manager);
+        idList.push(answer.id)
+        buildTeam()
+    }
 
-​
+​)};
+
